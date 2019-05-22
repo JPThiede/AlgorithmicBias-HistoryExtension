@@ -5,8 +5,8 @@ A Chrome Browser extension to gather browsing habits of survey participants.
 ## Installation/Testing:
 
 1.) Type in "chrome://extensions" into your Chrome address bar.
-2.) Switch the "Developer Mode" toggle to on
-3.) Click "Load Unpacked Extension" and navigate to the folder containing these files
+2.) Switch the "Developer Mode" toggle to on.
+3.) Click "Load Unpacked Extension" and navigate to the folder containing these files.
 
 ## Proof of Concept:
 
