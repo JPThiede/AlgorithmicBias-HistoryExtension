@@ -10,7 +10,7 @@ A Chrome Browser extension to gather browsing habits of survey participants.
 
 ## Proof of Concept:
 
-This is a very early proof of concept of the extension at the moment, but right now I've shown we can extract history information from a participant's browser, as well as assign them a uniqe, randomized, and persistent ID.
+This is a very early proof of concept of the extension at the moment, but right now I've shown we can extract history information from a participant's browser, as well as assign them a uniqe, randomized, and persistent ID. We have also assigned a timestamp at install time which will limit what we can query from the first 24 hour period. Non http/https traffic is ignored in the query, solving the issues that could have arisen from reporting files opened in Chrome
 
 ## Questions/Things which are unclear to me at this point:
 (Many questions/uncertainties are listed in the comments of the file, but I will list them here as well)  
@@ -26,8 +26,11 @@ This is a very early proof of concept of the extension at the moment, but right 
 
 ## Future Plans/TODOs:
 
-1. Extension also currently reports "browsing history" of files opened in Chrome (pdfs/doc/docx): we should probably drop these from the data collection  
-2. Strip PII entered in text fields/logins without stripping all parameters (otherwise all YouTube and Google search traffic will be indistinguishable)  
-3. Confirm that the "startTime" parameter of the Chrome history search works like I assume (i.e. that is is measured in miliseconds since the date 1/1/1970 like timestamps from the JavaScript Date class) CONFIRMED
-4. Find a way to call the search function on a 24 hour cycle. Possible problem if the browser/extension is not opened at the exact time: will need to find some way to have a countdown that doesn't break if it goes negative. 
+1. Strip PII entered in text fields/logins without stripping all parameters (otherwise all YouTube and Google search traffic will be indistinguishable)  
+
+2. Find a way to call the search function on a 24 hour cycle. Possible problem if the browser/extension is not opened at the exact time: will need to find some way to have a countdown that doesn't break if it goes negative.
+
+3. Begin looking into details about web server/database
+
+4. Some questions about consent still: How do we present our process to participants? What happens if consent is revoked midway through (after data is sent)? Would we then have to drop their data from our DB?
   
