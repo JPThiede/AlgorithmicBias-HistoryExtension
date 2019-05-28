@@ -8,7 +8,7 @@
         "storage"
     ],
     "background": {
-        "scripts": ["init.js"],
+        "scripts": ["init.js", "timedQueries.js"],
         "persistent": false
     },
     "browser_action": {

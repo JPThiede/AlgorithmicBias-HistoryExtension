@@ -19,6 +19,7 @@ function getInstallTimestamp (){
 
 // Store a persistent randomized id to associate with this instance
 // Uses Chrome Extension storage to store this ID persistently
+// Store first "lastQuery" as install time?
 function storeID (){
    var id = generateRandomId();
    chrome.storage.sync.set({"id": id}, function(){
@@ -34,7 +35,10 @@ function storeTimestamp (){
     chrome.storage.sync.set({"installTime": time}, function(){
         console.log("Timestamp = " + time);
         window.alert("Timestamp = " + time);
-    })
+    });
+    chrome.storage.sync.set({"lastQuery": time}, function(){
+        console.log("Timestamp = " + time);
+    });
 }
 
 // Function which aggregates the above functions

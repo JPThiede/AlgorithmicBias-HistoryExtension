@@ -162,6 +162,10 @@ function printURL (url) {
     return String(url);
 }
 
+function timeTest(){
+    window.alert("TIME INTERVAL TEST")
+}
+
 
 // This listener triggers whenever the extension icon is clicked and its content loaded
 document.addEventListener('DOMContentLoaded', function () {
