@@ -12,7 +12,12 @@ A Chrome Browser extension to gather browsing habits of survey participants.
 
 ## Proof of Concept:
 
-This is a very early proof of concept of the extension at the moment, but right now I've shown we can extract history information from a participant's browser, as well as assign them a uniqe, randomized, and persistent ID. We have also assigned a timestamp at install time which will limit what we can query from the first 24 hour period. Non http/https traffic is ignored in the query, solving the issues that could have arisen from reporting files opened in Chrome
+This is a very early proof of concept of the extension at the moment, but right now I've shown we can:
+1. Extract history information from a participant's browser.
+2. Assign them a uniqe, randomized, and persistent ID. 
+3. We have also assigned a timestamp at install time which will limit what we can query from the first 24 hour period. 
+4. Non http/https traffic is ignored in the query, solving the issues that could have arisen from reporting files opened in Chrome.
+5. 24 Hour cycle solution is in place: on a timer check if 24 have passed, and if true trigger query and send data.
 
 ## Questions/Things which are unclear to me at this point:
 (Many questions/uncertainties are listed in the comments of the file, but I will list them here as well)  
