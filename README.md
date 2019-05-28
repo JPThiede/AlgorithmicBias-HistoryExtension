@@ -8,6 +8,8 @@ A Chrome Browser extension to gather browsing habits of survey participants.
 2. Switch the "Developer Mode" toggle to on.  
 3. Click "Load Unpacked Extension" and navigate to the folder containing these files.  
 
+** We can publish the extension to the Chrome Extension Marketplace easily once it is ready for deployment
+
 ## Proof of Concept:
 
 This is a very early proof of concept of the extension at the moment, but right now I've shown we can extract history information from a participant's browser, as well as assign them a uniqe, randomized, and persistent ID. We have also assigned a timestamp at install time which will limit what we can query from the first 24 hour period. Non http/https traffic is ignored in the query, solving the issues that could have arisen from reporting files opened in Chrome
