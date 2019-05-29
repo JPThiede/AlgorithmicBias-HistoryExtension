@@ -35,9 +35,11 @@ This is a very early proof of concept of the extension at the moment, but right 
 
 1. Strip PII entered in text fields/logins without stripping all parameters (otherwise all YouTube and Google search traffic will be indistinguishable)  
 
-2. Find a way to call the search function on a 24 hour cycle. Possible problem if the browser/extension is not opened at the exact time: will need to find some way to have a countdown that doesn't break if it goes negative.
+2. Some questions about consent still: How do we present our process to participants? Do we have a script already prepared that informs participatnts? What happens if consent is revoked midway through (after data is sent)? Would we then have to drop their data from our DB?  
 
-3. Begin looking into details about web server/database
+3. Will need to dig into how to handle compensation. According to IRB proposal: we will be giving our gift cards for participation, I will need to figure out a method for automating the generation of these (how to pay, how to programattically create, etc.) 
 
-4. Some questions about consent still: How do we present our process to participants? What happens if consent is revoked midway through (after data is sent)? Would we then have to drop their data from our DB?
-  
+4. Details about web server/database to be ironed out. Will need access to something to test extension XHR (Cross-Origin http Request) features. It should be relatively simple based on my early reading. 
+
+
+
