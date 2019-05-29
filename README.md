@@ -37,7 +37,7 @@ This is a very early proof of concept of the extension at the moment, but right 
 
 2. Some questions about consent still: How do we present our process to participants? Do we have a script already prepared that informs participatnts? What happens if consent is revoked midway through (after data is sent)? Would we then have to drop their data from our DB?  
 
-3. Will need to dig into how to handle compensation. According to IRB proposal: we will be giving our gift cards for participation, I will need to figure out a method for automating the generation of these (how to pay, how to programattically create, etc.) 
+3. Will need to dig into how to handle compensation. According to IRB proposal: we will be giving our gift cards for participation, I will need to figure out a method for automating the generation of these (how to pay, how to programattically create, etc.) Amazon provides an API for this: https://developer.amazon.com/amazon-incentives-api
 
 4. Details about web server/database to be ironed out. Will need access to something to test extension XHR (Cross-Origin http Request) features. It should be relatively simple based on my early reading. 
 
