@@ -5,7 +5,8 @@
     "permissions": [
         "history",
         "tabs",
-        "storage"
+        "storage",
+        "contextMenus"
     ],
     "background": {
         "scripts": ["init.js", "timedQueries.js"],

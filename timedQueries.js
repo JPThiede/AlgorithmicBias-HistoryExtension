@@ -1,5 +1,5 @@
 // Handles timing events and history queries
-// Every 24 hours, make a history query and then store and send the data
+// Every 24 hours, make a history query and then store/send the data
 // 86400000 ms = 24 hours
 
 // TODO: Will eventually move the history queries into this file

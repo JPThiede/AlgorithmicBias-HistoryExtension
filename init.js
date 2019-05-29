@@ -19,7 +19,6 @@ function getInstallTimestamp (){
 
 // Store a persistent randomized id to associate with this instance
 // Uses Chrome Extension storage to store this ID persistently
-// Store first "lastQuery" as install time?
 function storeID (){
    var id = generateRandomId();
    chrome.storage.sync.set({"id": id}, function(){
@@ -45,6 +44,9 @@ function storeTimestamp (){
 function initilize (){
     storeID();
     storeTimestamp();
+    chrome.storage.sync.set({"consentFlag": true}, function(){
+        console.log("Consent Flag " + true);
+    });
 }
 
 // Define an event listener which triggers on extension installation
