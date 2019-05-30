@@ -11,6 +11,7 @@
 // Format [{pauseTime1: pauseTime1}, {pauseTime1: resumeTime1, {pauseTime2: resumeTime2}, {pauseTime2: resumeTime2}...]
 // For each interval, associate w/ time of pause, then iterate through and exclude anything within the bounds
 // If there is an odd number: ([{pause1: pause1}]), then consentFlag will be set to false, and we can just use the interval [pause1, currentTime]
+// TODO: This can likely be simplified in the future
 document.getElementById("pauseAll").addEventListener("click", function pauseAll(){
     if (document.getElementById("pauseAll").innerText == "Resume All Collection"){
         document.getElementById("pauseAll").innerText = "Pause All Collection"
@@ -67,4 +68,23 @@ document.getElementById("pauseAll").addEventListener("click", function pauseAll(
         });
     }
         
-})
+});
+
+// Event listener for the exclude domain button 
+// Prompts the user to enter a domain/website to exclude from the collection
+// 
+document.getElementById("exludeDomain").addEventListener("click", function exludeDomain(){
+    var domain = prompt("Enter a website domain to exclude from our gathering: ", "ex: example.com");
+    //window.alert("retVal = " + domain);
+    if (domain != null){
+        chrome.storage.sync.get("excludedDomains", function(result){
+            var domains = result.excludedDomains;
+            domains.push(domain);
+            chrome.storage.sync.set({"excludedDomains": domains}, function (){
+                window.alert("domains = " + JSON.stringify(domains));
+            })
+                
+            
+        });
+    }
+});

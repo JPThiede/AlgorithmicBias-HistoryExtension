@@ -33,7 +33,7 @@ function storeTimestamp (){
     var time = getInstallTimestamp();
     chrome.storage.sync.set({"installTime": time}, function(){
         console.log("Timestamp = " + time);
-        window.alert("Timestamp = " + time);
+        //window.alert("Timestamp = " + time);
     });
     chrome.storage.sync.set({"lastQuery": time}, function(){
         console.log("Timestamp = " + time);
@@ -41,6 +41,7 @@ function storeTimestamp (){
 }
 
 // Function which aggregates the above functions
+// Sets up default values for consentFlag, pauseTimes, excludedDomains
 function initilize (){
     storeID();
     storeTimestamp();
@@ -49,6 +50,9 @@ function initilize (){
     });
     chrome.storage.sync.set({"pauseTimes": []}, function(){
         console.log("Timestamps");
+    });
+    chrome.storage.sync.set({"excludedDomains": []}, function(){
+
     });
 }
 
