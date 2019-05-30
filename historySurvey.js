@@ -165,7 +165,50 @@ function getAllURLsFromInstalltime (divName){
                             );
                         });
                     }else{
-                        window.alert("Gathering is paused!");
+                        chrome.storage.sync.get("installTime", function(result){
+                            var time = result.installTime;
+                            chrome.history.search({
+                                // Only return http(s) entries
+                                'text': 'http',
+                                // From the given start time onward
+                                'startTime': time
+                            },
+                            function(historyItems){
+                                // define the div we will append new elements to
+                                var div = document.getElementById(divName);
+                                
+                                // Present the time for testing
+                                var time = result.installTime;
+                                // Converts ms since epoch into local UTC time (US CDT for us in IA)
+                                var date = new Date(time);
+                                var h3 = document.createElement("h3");
+                                var h3Node = document.createTextNode("Install Time = " + date);
+                                h3.appendChild(h3Node);
+                                div.appendChild(h3);
+                    
+                            // iterate through the historyItems array returned in the callback function
+                            // print out all urls within
+                            for (var i = 0; i < historyItems.length - 1; i++){
+                                if (!isInPauseInterval(historyItems[i].lastVisitTime, pauseInts)
+                                    && !containsExcludedDomain(historyItems[i].url, excludedDomains)){
+                                    var url = historyItems[i].url;
+                                    var p = document.createElement('p');
+                                    var pNode = document.createTextNode(printURL(url));
+                            
+                                    p.appendChild(pNode);
+                                    div.appendChild(p);
+                                } else {
+                                    var p = document.createElement('p');
+                                    var pNode = document.createTextNode("exluded entry");
+                            
+                                    p.appendChild(pNode);
+                                    div.appendChild(p);
+                                }
+                                
+                            }
+                            }
+                            );
+                        });
                     }
                 })
             });
@@ -184,12 +227,26 @@ function timeTest(){
 }
 
 function isInPauseInterval(urlVisitTime, pauseInts){
-   for (var i = 0; i < pauseInts.length; i += 2){
-       if (urlVisitTime > pauseInts[i].timestamp && urlVisitTime < pauseInts[i+1].timestamp){
-           return true
-       }
+   if (pauseInts.length%2 == 0){
+        for (var i = 0; i < pauseInts.length; i += 2){
+            if (urlVisitTime > pauseInts[i].timestamp && urlVisitTime < pauseInts[i+1].timestamp){
+                return true;
+            }
+        }
+        return false;
+   } else {
+        for (var i = 0; i < pauseInts.length-1; i += 2){
+            if (urlVisitTime > pauseInts[i].timestamp && urlVisitTime < pauseInts[i+1].timestamp){
+                return true;
+            }
+            
+        }
+        if (urlVisitTime > pauseInts[pauseInts.length-1].timestamp){
+            return true;
+        } 
+        return false;
    }
-   return false;
+ 
 }
 
 function containsExcludedDomain(url, excludedDomains){
