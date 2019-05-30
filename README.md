@@ -29,20 +29,21 @@ This is a very early proof of concept of the extension at the moment, but right 
 ## Questions Answered from IRB form: 
 1. Still somewhat unclear, will seek further clarification 
 2. From IRB proposal: Every 24 hours we will send browsing data for that time period. 
-3. IRB form states we will have a server/database in which we will store. 
+3. IRB form states we will have a server/database in which we will store. I've gotten access to the server now.
 
 ## TODOs For 6/5/2019:
 
 1. Handle cases of consent revocation: Exclude all traffic between pause and resume of collection, and also provide means for users to specify domains which they want excluded from the collection 
 
-*  In the early stages of working through this:  
-*  Current state is that the Chrome history search method does not provide the necessary granularity itself. I will need to apply my own *  methods/filters/etc. over the search results and exclude any necessary results before they are sent to us.
+* Mostly complete at this stage: 
+* We can pause the collection, and later resume it. Anything visited within that time will be excluded. (It is still retrieved by chrome.history.search, but we will simple not send/store them: the result from the query are cleared once the callback funtion completes)
+* We have a button to prompt users to indicate specific webpages or domains that they wish to be excluded from our collection.
 
 2. Work through issues with sending data to the remote server and figure out what, if any, applications it needs to be running.
 
 *  I have not currently worked through this, but from early digging: 
 *  It may need to implement http(s), so we can send to server using POST requests? 
-*  Will I need to create an SSH key pair(s) for the extension/instances?
+
 
 ## Future Plans:
 
