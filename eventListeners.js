@@ -13,14 +13,45 @@ document.getElementById("pauseAll").addEventListener("click", function pauseAll(
         var currentTime = (new Date).getTime();
         var timeUTC = new Date(currentTime);
         chrome.storage.sync.set({"consentFlag": true}, function(){
-            window.alert("Resumed at " + timeUTC);
+            //window.alert("Resumed at " + timeUTC);
+        });
+        // Find the timestamp of the last pause to associate w/ this resume time
+        chrome.storage.sync.get("lastPause", function(result){
+            var last = result.lastPause;
+            //window.alert("LAST PAUSE = " + last);
+            // Get the pauseTimes JSON object
+            chrome.storage.sync.get("pauseTimes", function(result){
+                // Add the current (resume) time to the JSON obj w/ key corresponding to its corresponding pause time
+                var pauseTimestamps = result.pauseTimes;
+                pauseTimestamps.push({[last]: currentTime});
+                // Set the new JSON object to storage
+                chrome.storage.sync.set({"pauseTimes": pauseTimestamps}, function(){
+                    chrome.storage.sync.get("pauseTimes", function(result){
+                        var pt = result.pauseTimes;
+                        window.alert("JSON = " + JSON.stringify(pt));
+                    });
+                });
+            });
         });
     } else {
         document.getElementById("pauseAll").innerText = "Resume All Collection"
         var currentTime = (new Date).getTime();
         var timeUTC = new Date(currentTime);
         chrome.storage.sync.set({"consentFlag": false}, function(){
-            window.alert("Paused at " + timeUTC);
+            //window.alert("Paused at " + timeUTC);
+        });
+        // Get the stored JSON object and add the current timestamp to it in format {pauseTime: pauseTime}
+        chrome.storage.sync.get("pauseTimes", function(result){
+            var pauseTimestamps = result.pauseTimes;
+            pauseTimestamps.push({[currentTime]: currentTime});
+            chrome.storage.sync.set({"pauseTimes": pauseTimestamps}, function(){
+                window.alert("JSON = " + JSON.stringify(pauseTimestamps));
+            });
+        });
+        // Set a variable for the pauseTime 
+        // This way, when we resume, the resume timestamp can be added to the JSON object in format {pauseTime: resumeTime}
+        chrome.storage.sync.set({"lastPause": currentTime}, function(){
+
         });
     }
         

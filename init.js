@@ -47,6 +47,9 @@ function initilize (){
     chrome.storage.sync.set({"consentFlag": true}, function(){
         console.log("Consent Flag " + true);
     });
+    chrome.storage.sync.set({"pauseTimes": []}, function(){
+        console.log("Timestamps");
+    });
 }
 
 // Define an event listener which triggers on extension installation
