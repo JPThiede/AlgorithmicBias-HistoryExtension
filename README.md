@@ -43,7 +43,8 @@ This is a very early proof of concept of the extension at the moment, but right 
 
 *  I have not currently worked through this, but from early digging: 
 *  It may need to implement http(s), so we can send to server using POST requests? 
-*  The original idea I had is likely not feasible (XHR), but I will look into native messaging (https://developer.chrome.com/extensions/nativeMessaging) as a possible solution
+*  The original idea I had is likely not feasible (XHR), but I will look into native messaging (https://developer.chrome.com/extensions/nativeMessaging) as a possible solution.
+*  Does toutatis implement/support ftp?s
 
 
 
