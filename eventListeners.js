@@ -7,6 +7,10 @@
 // Use these to exclude in chrome history search?
 // FOR TOMMOROW:
 // serach returns HistoryItems -> HistoryItems can be fed into getVisits -> getVisits returns VisitItem -> VisitItem.visitTime can see if any visits to that site were within that timespan -> drop from collection?
+// Store time intervals in a JSON-like object stored in sync storage:
+// Format [{pauseTime1: pauseTime1}, {pauseTime1: resumeTime1, {pauseTime2: resumeTime2}, {pauseTime2: resumeTime2}...]
+// For each interval, associate w/ time of pause, then iterate through and exclude anything within the bounds
+// If there is an odd number: ([{pause1: pause1}]), then consentFlag will be set to false, and we can just use the interval [pause1, currentTime]
 document.getElementById("pauseAll").addEventListener("click", function pauseAll(){
     if (document.getElementById("pauseAll").innerText == "Resume All Collection"){
         document.getElementById("pauseAll").innerText = "Pause All Collection"
@@ -23,12 +27,19 @@ document.getElementById("pauseAll").addEventListener("click", function pauseAll(
             chrome.storage.sync.get("pauseTimes", function(result){
                 // Add the current (resume) time to the JSON obj w/ key corresponding to its corresponding pause time
                 var pauseTimestamps = result.pauseTimes;
-                pauseTimestamps.push({[last]: currentTime});
+                pauseTimestamps.push({pauseStart : last, timestamp : currentTime});
+               
                 // Set the new JSON object to storage
                 chrome.storage.sync.set({"pauseTimes": pauseTimestamps}, function(){
                     chrome.storage.sync.get("pauseTimes", function(result){
                         var pt = result.pauseTimes;
-                        window.alert("JSON = " + JSON.stringify(pt));
+                        var str = "";
+                        for (var i in pt){
+                            str += "Object = " + JSON.stringify(pt[i]);
+                            str += "pauseTime = " + pt[i].pauseStart + " timestamp = " + pt[i].timestamp + "\n";
+                        }
+
+                        window.alert(str);
                     });
                 });
             });
@@ -40,10 +51,11 @@ document.getElementById("pauseAll").addEventListener("click", function pauseAll(
         chrome.storage.sync.set({"consentFlag": false}, function(){
             //window.alert("Paused at " + timeUTC);
         });
-        // Get the stored JSON object and add the current timestamp to it in format {pauseTime: pauseTime}
+        // Get the stored JSON-like object and add the current timestamp to it in format {pauseTime: pauseTime}
         chrome.storage.sync.get("pauseTimes", function(result){
             var pauseTimestamps = result.pauseTimes;
-            pauseTimestamps.push({[currentTime]: currentTime});
+            pauseTimestamps.push({pauseStart: currentTime, timestamp: currentTime});
+            
             chrome.storage.sync.set({"pauseTimes": pauseTimestamps}, function(){
                 window.alert("JSON = " + JSON.stringify(pauseTimestamps));
             });
