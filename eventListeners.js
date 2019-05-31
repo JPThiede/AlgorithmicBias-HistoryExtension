@@ -74,7 +74,7 @@ document.getElementById("pauseAll").addEventListener("click", function pauseAll(
 // Prompts the user to enter a domain/website to exclude from the collection
 // 
 document.getElementById("exludeDomain").addEventListener("click", function exludeDomain(){
-    var domain = prompt("Enter a website domain to exclude from our gathering: ", "ex: example.com");
+    var domain = prompt("Enter a website domain to exclude from our gathering: ", "");
     //window.alert("retVal = " + domain);
     if (domain != null){
         chrome.storage.sync.get("excludedDomains", function(result){
@@ -88,3 +88,18 @@ document.getElementById("exludeDomain").addEventListener("click", function exlud
         });
     }
 });
+
+document.getElementById("listExcluded").addEventListener("click", function listExcluded(){
+    chrome.storage.sync.get("excludedDomains", function(result){
+        var domains = result.excludedDomains;
+        if (!(domains.length == 0)){
+            var list = "";
+            for (var i = 0; i < domains.length; i++){
+                list += domains[i] + "\n";
+            }
+            window.alert("List of excluded domains:\n" + list);
+        } else {
+            window.alert("No domains have been excluded")
+        }
+    });
+})
