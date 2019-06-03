@@ -106,5 +106,7 @@ document.getElementById("listExcluded").addEventListener("click", function listE
 
 document.getElementById("testNA").addEventListener("click", function testNA(){
     var test = prompt("Enter a test string to send to native app: ", "");
-    chrome.runtime.sendMessage({text:test});
+    var port = chrome.runtime.connectNative('native.test')
+    port.postMessage({text: test});
+    //chrome.runtime.sendMessage({text:test});
 })

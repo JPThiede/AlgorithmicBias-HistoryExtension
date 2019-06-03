@@ -6,11 +6,10 @@
         "history",
         "tabs",
         "storage",
-        "nativeMessaging",
-        "contextMenus"
+        "nativeMessaging"
     ],
     "background": {
-        "scripts": ["init.js", "timedQueries.js", "background.js"],
+        "scripts": ["init.js", "timedQueries.js"],
         "persistent": false
     },
     "browser_action": {
