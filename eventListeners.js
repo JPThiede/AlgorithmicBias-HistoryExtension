@@ -73,7 +73,7 @@ document.getElementById("pauseAll").addEventListener("click", function pauseAll(
 // Event listener for the exclude domain button 
 // Prompts the user to enter a domain/website to exclude from the collection
 // 
-document.getElementById("exludeDomain").addEventListener("click", function exludeDomain(){
+document.getElementById("excludeDomain").addEventListener("click", function excludeDomain(){
     var domain = prompt("Enter a website domain to exclude from our gathering: ", "");
     //window.alert("retVal = " + domain);
     if (domain != null){
@@ -102,4 +102,9 @@ document.getElementById("listExcluded").addEventListener("click", function listE
             window.alert("No domains have been excluded")
         }
     });
+})
+
+document.getElementById("testNA").addEventListener("click", function testNA(){
+    var test = prompt("Enter a test string to send to native app: ", "");
+    chrome.runtime.sendMessage({text:test});
 })

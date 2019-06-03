@@ -5,10 +5,12 @@
     "permissions": [
         "history",
         "tabs",
-        "storage"
+        "storage",
+        "nativeMessaging",
+        "contextMenus"
     ],
     "background": {
-        "scripts": ["init.js", "timedQueries.js"],
+        "scripts": ["init.js", "timedQueries.js", "background.js"],
         "persistent": false
     },
     "browser_action": {

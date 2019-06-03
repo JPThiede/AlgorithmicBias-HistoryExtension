@@ -54,6 +54,11 @@ function initilize (){
     chrome.storage.sync.set({"excludedDomains": []}, function(){
 
     });
+    chrome.contextMenus.create({
+       "id": "contextMenuTest",
+       "title": "TEST",
+       "contexts": ["selection"] 
+    });
 }
 
 // Define an event listener which triggers on extension installation
