@@ -19,8 +19,12 @@ try:
 
         text = sys.stdin.read()
 
+        text = text.split(',')
         output2 = open(".\\test2.txt", 'w')
-        output2.write(text)
+        for url in text:
+            output2.writelines(str(url + "\n"))
+        
+        
 except Exception as e:
     output = open(".\\error.txt", 'w')
     output.write("ERROR: " + str(e))

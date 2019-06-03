@@ -8,6 +8,12 @@ A Chrome Browser extension to gather browsing habits of survey participants.
 2. Switch the "Developer Mode" toggle to on.  
 3. Click "Load Unpacked Extension" and navigate to the folder containing these files.  
 
+## Installation for Native Script:
+
+** Currently Only works for Windows (will write .sh scripts for UNIX like OSs)
+
+1. Run install.bat as admin before testing extension
+
 ** We can publish the extension to the Chrome Extension Marketplace easily once it is ready for deployment
 
 ## Proof of Concept:

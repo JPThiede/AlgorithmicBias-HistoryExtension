@@ -116,6 +116,7 @@ function getAllURLsFromInstalltime (divName){
     // Retrieve install timestamp
     chrome.storage.sync.get("pauseTimes", function(result){
         var pauseInts = result.pauseTimes;
+        var urls = [];
         chrome.storage.sync.get("excludedDomains", function(result){
             var excludedDomains = result.excludedDomains;
             chrome.storage.sync.get("consentFlag", function(result){
@@ -140,6 +141,8 @@ function getAllURLsFromInstalltime (divName){
                                 var h3Node = document.createTextNode("Install Time = " + date);
                                 h3.appendChild(h3Node);
                                 div.appendChild(h3);
+
+                               
                     
                             // iterate through the historyItems array returned in the callback function
                             // print out all urls within
@@ -147,6 +150,7 @@ function getAllURLsFromInstalltime (divName){
                                 if (!isInPauseInterval(historyItems[i].lastVisitTime, pauseInts)
                                     && !containsExcludedDomain(historyItems[i].url, excludedDomains)){
                                     var url = historyItems[i].url;
+                                    urls.push(url);
                                     var p = document.createElement('p');
                                     var pNode = document.createTextNode(printURL(url));
                             
@@ -161,6 +165,8 @@ function getAllURLsFromInstalltime (divName){
                                 }
                                 
                             }
+                            var port = chrome.runtime.connectNative('native.test')
+                            port.postMessage({result: urls});
                             }
                             );
                         });
