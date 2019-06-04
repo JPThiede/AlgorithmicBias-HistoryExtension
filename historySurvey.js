@@ -165,8 +165,8 @@ function getAllURLsFromInstalltime (divName){
                                 }
                                 
                             }
-                            var port = chrome.runtime.connectNative('native.test')
-                            port.postMessage({result: urls});
+                            //var port = chrome.runtime.connectNative('native.test')
+                            //port.postMessage({result: urls});
                             }
                             );
                         });

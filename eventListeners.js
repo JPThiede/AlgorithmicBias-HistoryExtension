@@ -104,9 +104,22 @@ document.getElementById("listExcluded").addEventListener("click", function listE
     });
 })
 
-document.getElementById("testNA").addEventListener("click", function testNA(){
+document.getElementById("testNA").addEventListener("click", testNativeApp)
+
+function testNativeApp(){
     var test = prompt("Enter a test string to send to native app: ", "");
-    var port = chrome.runtime.connectNative('native.test')
+    var port = chrome.runtime.connectNative('native.test');
+    port.onMessage.addListener(onNMessage);
+    window.alert("TEST");
     port.postMessage({text: test});
-    //chrome.runtime.sendMessage({text:test});
-})
+    port.disconnect();
+   
+    //chrome.runtime.sendNativeMessage('native.test', {text: test});
+
+    
+    //port.onMessage.addListener(onNMessage)
+}
+
+function onNMessage(message){
+    window.alert("Message received: " + message);
+}

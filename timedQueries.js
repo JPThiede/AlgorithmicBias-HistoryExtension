@@ -34,7 +34,7 @@ function dayPassed(){
         window.alert("SPARTA Browsing History Survey: 24 hour cycle has passed, browsing data will be sent");
         if ((currentTime - result.lastQuery) > 86400000){
             //alertTrue();
-            get24HoursOfHistory();
+            //get24HoursOfHistory();
             return true;
         } else{
             //alertFalse();
@@ -49,6 +49,14 @@ function alertTrue(){
 
 function alertFalse(){
     window.alert("False");
+}
+
+function testNative(){
+    window.alert("Test");
+    var port = chrome.runtime.connectNative('native.test');
+    port.postMessage({result: "test"});
+    port.disconnect();
+    
 }
 
 // This function will query all history from 24 hours ago
@@ -69,14 +77,16 @@ function get24HoursOfHistory(){
     function(historyItems){
         var urls = []
         for (var i = 0; i < historyItems.length; i++){
-            urls.push(historyItems[i]);
+            urls.push(historyItems[i].url);
         }
         var port = chrome.runtime.connectNative('native.test')
         port.postMessage({result: urls});
+        window.alert("SPARTA@UIowa Browsing History Survey: 24 hours passed, data was collected")
+        port.disconnect();
     });
 }
 
 //
-var testTimer = setInterval(dayPassed, 10000);
+var testTimer = setInterval(get24HoursOfHistory, 5000);
 
 //var dayTimer = setInterval(timeTest, 86400000);

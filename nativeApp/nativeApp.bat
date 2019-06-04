@@ -1,2 +1,2 @@
 @echo off
-python "nativeApp.py" %*
+python "nativeApp.py"
