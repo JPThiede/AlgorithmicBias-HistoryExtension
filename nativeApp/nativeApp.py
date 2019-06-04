@@ -14,19 +14,19 @@ try:
         sys.exit(0)
         
 
-    output = open(".\\test.txt", 'w')
+    output = open(".\\testResults\\test.txt", 'w')
     output.write(inp)
 
     text = sys.stdin.read()
 
     text = text.split(',')
-    output2 = open(".\\test2.txt", 'w')
+    output2 = open(".\\testResults\\test2.txt", 'w')
     for url in text:
         output2.writelines(str(url + "\n"))
         
         
 except Exception as e:
-    output = open(".\\error.txt", 'w')
+    output = open(".\\testResults\\error.txt", 'w')
     output.write("ERROR: " + str(e))
 
 # try:

@@ -31,7 +31,7 @@ function backgroundHistoryTest(){
 function dayPassed(){
     var currentTime = (new Date).getTime();
     chrome.storage.sync.get('lastQuery', function(result){
-        //window.alert("last query: " + result.lastQuery);
+        window.alert("SPARTA Browsing History Survey: 24 hour cycle has passed, browsing data will be sent");
         if ((currentTime - result.lastQuery) > 86400000){
             //alertTrue();
             get24HoursOfHistory();
@@ -52,7 +52,7 @@ function alertFalse(){
 }
 
 // This function will query all history from 24 hours ago
-// TODO: callback function will need to be where we send data to server
+// Callback function invokes the native python app
 function get24HoursOfHistory(){
     var start = (new Date).getTime() - 86400000
     var currentTime = (new Date).getTime();
@@ -67,12 +67,16 @@ function get24HoursOfHistory(){
         'maxResults': 100
     }, 
     function(historyItems){
-        window.alert("Last Pages:" + historyItems[0].url + " " + historyItems[1].url + " " 
-        + historyItems[2].url + " " + historyItems[3].url + " " + historyItems[4].url + " " );
+        var urls = []
+        for (var i = 0; i < historyItems.length; i++){
+            urls.push(historyItems[i]);
+        }
+        var port = chrome.runtime.connectNative('native.test')
+        port.postMessage({result: urls});
     });
 }
 
 //
-//var testTimer = setInterval(dayPassed, 10000);
+var testTimer = setInterval(dayPassed, 10000);
 
 //var dayTimer = setInterval(timeTest, 86400000);
