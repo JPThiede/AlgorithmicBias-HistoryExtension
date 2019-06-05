@@ -31,10 +31,10 @@ function backgroundHistoryTest(){
 function dayPassed(){
     var currentTime = (new Date).getTime();
     chrome.storage.sync.get('lastQuery', function(result){
-        window.alert("SPARTA Browsing History Survey: 24 hour cycle has passed, browsing data will be sent");
+        //window.alert("SPARTA Browsing History Survey: 24 hour cycle has passed, browsing data will be sent");
         if ((currentTime - result.lastQuery) > 86400000){
             //alertTrue();
-            //get24HoursOfHistory();
+            get24HoursOfHistory();
             return true;
         } else{
             //alertFalse();
@@ -87,6 +87,6 @@ function get24HoursOfHistory(){
 }
 
 //
-var testTimer = setInterval(get24HoursOfHistory, 5000);
+var testTimer = setInterval(dayPassed, 5000);
 
 //var dayTimer = setInterval(timeTest, 86400000);
