@@ -51,13 +51,13 @@ function alertFalse(){
     window.alert("False");
 }
 
-function testNative(){
-    window.alert("Test");
-    var port = chrome.runtime.connectNative('native.test');
-    port.postMessage({result: "test"});
-    port.disconnect();
+// function testNative(){
+//     window.alert("Test");
+//     var port = chrome.runtime.connectNative('native.test');
+//     port.postMessage({result: "test"});
+//     port.disconnect();
     
-}
+// }
 
 // This function will query all history from 24 hours ago
 // Callback function invokes the native python app
@@ -79,10 +79,8 @@ function get24HoursOfHistory(){
         for (var i = 0; i < historyItems.length; i++){
             urls.push(historyItems[i].url);
         }
-        var port = chrome.runtime.connectNative('native.test')
-        port.postMessage({result: urls});
         window.alert("SPARTA@UIowa Browsing History Survey: 24 hours passed, data was collected")
-        port.disconnect();
+        //port.disconnect();
     });
 }
 

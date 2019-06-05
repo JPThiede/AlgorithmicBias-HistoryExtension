@@ -104,22 +104,50 @@ document.getElementById("listExcluded").addEventListener("click", function listE
     });
 })
 
-document.getElementById("testNA").addEventListener("click", testNativeApp)
+document.getElementById("testXHR").addEventListener("click", function testXHR(){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://127.0.0.1:2812", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function(){
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
+            window.alert("Sent");
+        }
+    };
 
-function testNativeApp(){
-    var test = prompt("Enter a test string to send to native app: ", "");
-    var port = chrome.runtime.connectNative('native.test');
-    port.onMessage.addListener(onNMessage);
-    window.alert("TEST");
-    port.postMessage({text: test});
-    port.disconnect();
+    chrome.history.search({
+        'text': 'http',
+    },
+    function(historyItems){
+        
+        var urls = [];
+        
+        
+        for (var i = 0; i < historyItems.length; i++){
+            urls.push(historyItems[i].url);
+        }
+        
+        
+        xhr.send(urls);
+    });
+    
+})
+
+// document.getElementById("testNA").addEventListener("click", testNativeApp)
+
+// function testNativeApp(){
+//     var test = prompt("Enter a test string to send to native app: ", "");
+//     var port = chrome.runtime.connectNative('native.test');
+//     port.onMessage.addListener(onNMessage);
+//     window.alert("TEST");
+//     port.postMessage({text: test});
+//     port.disconnect();
    
-    //chrome.runtime.sendNativeMessage('native.test', {text: test});
+//     //chrome.runtime.sendNativeMessage('native.test', {text: test});
 
     
-    //port.onMessage.addListener(onNMessage)
-}
+//     //port.onMessage.addListener(onNMessage)
+// }
 
-function onNMessage(message){
-    window.alert("Message received: " + message);
-}
+// function onNMessage(message){
+//     window.alert("Message received: " + message);
+// }
