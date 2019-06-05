@@ -1,1 +1,0 @@
-REG ADD "HKLM\Software\Google\Chrome\NativeMessagingHosts\native.test" /ve /t REG_SZ /d "C:\Users\jthie\Desktop\SPARTALabRepos\AlgorithmicBias-HistoryExtension\nativeApp\nativeTest.json" /f

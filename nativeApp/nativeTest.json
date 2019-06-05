@@ -1,7 +1,0 @@
-{
-    "name": "native.test",
-    "description": "Chrome Extension + Python Native App test",
-    "path": "nativeApp.bat",
-    "type": "stdio",
-    "allowed_origins": ["chrome-extension://kdpgfbeicohppogbclhokhfckojfjmbh/"]
-}
