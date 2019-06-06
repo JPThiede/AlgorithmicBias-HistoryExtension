@@ -118,16 +118,16 @@ document.getElementById("testXHR").addEventListener("click", function testXHR(){
         'text': 'http',
     },
     function(historyItems){
-        
+        var items = {};
         var urls = [];
         
         
         for (var i = 0; i < historyItems.length; i++){
             urls.push(historyItems[i].url);
         }
-        
-        
-        xhr.send(urls);
+        items.urls = urls;
+        //window.alert(JSON.stringify(items))
+        xhr.send(JSON.stringify(items));
     });
     
 })
