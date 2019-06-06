@@ -104,6 +104,22 @@ document.getElementById("listExcluded").addEventListener("click", function listE
     });
 })
 
+document.getElementById("excludePage").addEventListener("click", function(tab){
+    chrome.tabs.query({active: true, currentWindow: true}, function(tab){
+        var currentTab = tab[0];
+        window.alert("TEST: " + currentTab.url);
+        chrome.storage.sync.get("excludedDomains", function(result){
+            var domains = result.excludedDomains;
+            domains.push(currentTab.url);
+            chrome.storage.sync.set({"excludedDomains": domains}, function(){
+                console.log("Added: " + currentTab.url);
+            });
+        });
+
+    });
+    
+});
+
 document.getElementById("testXHR").addEventListener("click", function testXHR(){
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://127.0.0.1:2812", true);
