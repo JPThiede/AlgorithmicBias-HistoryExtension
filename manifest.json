@@ -8,7 +8,7 @@
         "activeTab",
         "storage",
         "nativeMessaging",
-        "http://127.0.0.1:2812/*"
+        "http://128.255.96.34/*"
     ],
     "background": {
         "scripts": ["init.js", "timedQueries.js"],
