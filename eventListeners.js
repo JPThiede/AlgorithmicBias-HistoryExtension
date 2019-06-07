@@ -129,22 +129,28 @@ document.getElementById("testXHR").addEventListener("click", function testXHR(){
             window.alert("Sent");
         }
     };
-
-    chrome.history.search({
-        'text': 'http',
-    },
-    function(historyItems){
-        var items = {};
-        var urls = [];
-        
-        
-        for (var i = 0; i < historyItems.length; i++){
-            urls.push(historyItems[i].url);
-        }
-        items.urls = urls;
-        //window.alert(JSON.stringify(items))
-        xhr.send(JSON.stringify(items));
+    chrome.storage.sync.get("id", function(result){
+        var uid = result.id;
+        var time = (new Date).getTime();
+        chrome.history.search({
+            'text': 'http',
+        },
+        function(historyItems){
+            var items = {};
+            var urls = [];
+            
+            
+            for (var i = 0; i < historyItems.length; i++){
+                urls.push(historyItems[i].url);
+            }
+            items.uid = uid;
+            items.time = time;
+            items.urls = urls;
+            //window.alert(JSON.stringify(items))
+            xhr.send(JSON.stringify(items));
+        });
     });
+    
     
 })
 
