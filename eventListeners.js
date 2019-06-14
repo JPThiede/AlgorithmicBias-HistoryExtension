@@ -153,23 +153,3 @@ document.getElementById("testXHR").addEventListener("click", function testXHR(){
     
     
 })
-
-// document.getElementById("testNA").addEventListener("click", testNativeApp)
-
-// function testNativeApp(){
-//     var test = prompt("Enter a test string to send to native app: ", "");
-//     var port = chrome.runtime.connectNative('native.test');
-//     port.onMessage.addListener(onNMessage);
-//     window.alert("TEST");
-//     port.postMessage({text: test});
-//     port.disconnect();
-   
-//     //chrome.runtime.sendNativeMessage('native.test', {text: test});
-
-    
-//     //port.onMessage.addListener(onNMessage)
-// }
-
-// function onNMessage(message){
-//     window.alert("Message received: " + message);
-// }

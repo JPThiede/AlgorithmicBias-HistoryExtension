@@ -7,7 +7,6 @@
         "tabs",
         "activeTab",
         "storage",
-        "nativeMessaging",
         "http://128.255.96.34/*",
         "http://127.0.0.1/*"
     ],
