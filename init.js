@@ -54,6 +54,9 @@ function initilize (){
     chrome.storage.sync.set({"excludedDomains": []}, function(){
 
     });
+    chrome.storage.sync.set({"giftLinks" :[]}, function(){
+
+    });
 }
 
 // Define an event listener which triggers on extension installation

@@ -283,5 +283,22 @@ document.addEventListener('DOMContentLoaded', function () {
         h3.appendChild(h3Node);
         div.appendChild(h3);
     });
+
+    chrome.storage.sync.get("giftLinks", function(result){
+        var links = result.giftLinks;
+        var h3 = document.createElement("h3");
+        var h3Node = document.createTextNode("Gift Links:");
+        h3.appendChild(h3Node);
+        div.appendChild(h3);
+        if (!(links.length == 0)) {
+            
+            for (var i = 0; i < links.length; i++){
+                var p = document.createElement('p');
+                var pNode = document.createTextNode(links[i]);
+                p.appendChild(pNode);
+                div.appendChild(p);
+            }  
+        } 
+    });
     getAllURLsFromInstalltime ("lasturl_div");
 });

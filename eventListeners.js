@@ -126,7 +126,13 @@ document.getElementById("testXHR").addEventListener("click", function testXHR(){
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function(){
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
-            window.alert("Sent");
+            var resp = xhr.responseText;
+            window.alert("Resp: " + resp);
+            chrome.storage.sync.get("giftLinks", function(result){
+                links = result.giftLinks;
+                links.push(resp);
+                chrome.storage.sync.set({"giftLinks": links});
+            });
         }
     };
     chrome.storage.sync.get("id", function(result){

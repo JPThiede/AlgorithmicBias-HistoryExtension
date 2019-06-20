@@ -140,5 +140,7 @@ function isInPauseInterval(urlVisitTime, pauseInts){
 // Setting a regular 24 hour timer only works if the user has their browser open at the exact time every day
 var oneDayCheckTimer = setInterval(dayPassed, 5000);
 
+// var timerTest = setInterval(get24HoursOfHistory, 10000);
+
 
 //var dayTimer = setInterval(timeTest, 86400000);
