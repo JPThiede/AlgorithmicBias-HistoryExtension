@@ -8,6 +8,8 @@
 // If true, then trigger a new query
 // Else do nothing 
 
+paramWL = ["q=", "query=", "search=", "search_query=", "searchtext=", "searchkey="];
+
 function timeTest(){
     window.alert("TIME INTERVAL TEST")
 }
@@ -69,8 +71,25 @@ function get24HoursOfHistory(){
                     //Ensure that the current url is neither within a pause interval nor in an excluded domain/page 
                     if (!isInPauseInterval(historyItems[i].lastVisitTime, pauseInts)
                         && !containsExcludedDomain(historyItems[i].url, excludedDomains)){
+                            //Strip non WL parameters
+                            var params = "";
+                            var splitParams = [];
+                            var url = historyItems[i].url.split('?')[0];
+                            params = (historyItems[i].url.split('?')[1]);
+                            if (!(params === undefined)){
+                                url = url + '?'
+                                splitParams = params.split('&');
+                                for (var j = 0; j < splitParams.length; j++){
+                                    if (paramWL.some(function(element) {return splitParams[j].includes(element)} )){
+                                        url = url + '&' + splitParams[j];
+                                    }
+                                }
+                            }
                             //Push to urls
-                            urls.push(historyItems[i].url);
+                            urls.push(url);
+                            
+
+                            // urls.push(historyItems[i].url);
                     } else {
                         //Skip
                         continue;

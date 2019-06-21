@@ -137,10 +137,6 @@ document.getElementById("testXHR").addEventListener("click", function testXHR(){
             var urls = [];
             var strippedUrls = [];
             
-            
-           
-
-            
             for (var i = 0; i < historyItems.length; i++){
                 var params = "";
                 var splitParams = [];
