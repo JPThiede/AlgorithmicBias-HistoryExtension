@@ -1,17 +1,8 @@
 // Script in which we aggregate all of our event listeners
 
+paramWL = ["q=", "query=", "search=", "search_query=", "searchtext=", "searchkey="];
 
 // Event listener for the blanket pause button
-// TOOO: Figure out ways in which to pause specific spans of time
-// variables for start/end timestamps of the pause period?
-// Use these to exclude in chrome history search?
-// FOR TOMMOROW:
-// serach returns HistoryItems -> HistoryItems can be fed into getVisits -> getVisits returns VisitItem -> VisitItem.visitTime can see if any visits to that site were within that timespan -> drop from collection?
-// Store time intervals in a JSON-like object stored in sync storage:
-// Format [{pauseTime1: pauseTime1}, {pauseTime1: resumeTime1, {pauseTime2: resumeTime2}, {pauseTime2: resumeTime2}...]
-// For each interval, associate w/ time of pause, then iterate through and exclude anything within the bounds
-// If there is an odd number: ([{pause1: pause1}]), then consentFlag will be set to false, and we can just use the interval [pause1, currentTime]
-// TODO: This can likely be simplified in the future
 document.getElementById("pauseAll").addEventListener("click", function pauseAll(){
     if (document.getElementById("pauseAll").innerText == "Resume All Collection"){
         document.getElementById("pauseAll").innerText = "Pause All Collection"
@@ -122,7 +113,7 @@ document.getElementById("excludePage").addEventListener("click", function(tab){
 
 document.getElementById("testXHR").addEventListener("click", function testXHR(){
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://128.255.96.34:2812", true);
+    xhr.open("POST", "http://127.0.0.1:2812", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function(){
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
@@ -144,15 +135,34 @@ document.getElementById("testXHR").addEventListener("click", function testXHR(){
         function(historyItems){
             var items = {};
             var urls = [];
+            var strippedUrls = [];
             
+            
+           
+
             
             for (var i = 0; i < historyItems.length; i++){
-                urls.push(historyItems[i].url);
+                var params = "";
+                var splitParams = [];
+                // urls.push(historyItems[i].url);
+                // strippedUrls.push(historyItems[i].url.split('?')[0]);
+                var url = historyItems[i].url.split('?')[0];
+                params = (historyItems[i].url.split('?')[1]);
+                if (!(params === undefined)){
+                    url = url + '?'
+                    splitParams = params.split('&');
+                    for (var j = 0; j < splitParams.length; j++){
+                        if (paramWL.some(function(element) {return splitParams[j].includes(element)} )){
+                            url = url + '&' + splitParams[j];
+                        }
+                    }
+                }
+                urls.push(url);
             }
+            
             items.uid = uid;
             items.time = time;
             items.urls = urls;
-            //window.alert(JSON.stringify(items))
             xhr.send(JSON.stringify(items));
         });
     });
