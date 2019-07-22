@@ -7,6 +7,7 @@
 // This interval runs a function which checks if a day has passed from now and the last query
 // If true, then trigger a new query
 // Else do nothing 
+// This isn't the most elegant solution, but it does ensure that this check is not tied to a very specific time of day to occur
 
 paramWL = ["q=", "query=", "search=", "search_query=", "searchtext=", "searchkey="];
 

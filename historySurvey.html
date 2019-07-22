@@ -3,21 +3,23 @@
     <head>
         <title>Survey Test</title>
         <style>
-            body {min-width: 300px;}
+           @import url("historySurvey.css");
         </style>
     </head>
     <body>
-        <h2>SPARTA Algorithmic Bias Browsing History Extension</h2>
+        <h3>SPARTA@Uiowa Browsing History Extension</h3>
+        <hr></hr>
         <button id="pauseAll">Pause All Collection</button> 
-        <br></br>
+        
         <button id="excludeDomain">Exclude Specific Websites/Domains</button>
-        <br></br>
+        
         <button id="listExcluded">List Excluded Websites/Domains</button>
-        <br></br>
+        
         <button id="excludePage">Exclude the Current Page</button>
-        <br></br>
+        
         <button id="testXHR">Send message to server</button>
-        <h2>Last Visited URLs:</h2>
+        <hr></hr>
+        <h3>Last Visited URLs:</h3>
         <div id="lasturl_div"></div>
         <script src='historySurvey.js'></script>
         <script src='eventListeners.js'></script>

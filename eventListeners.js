@@ -113,7 +113,7 @@ document.getElementById("excludePage").addEventListener("click", function(tab){
 
 document.getElementById("testXHR").addEventListener("click", function testXHR(){
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:2812", true);
+    xhr.open("POST", "http://128.255.96.34:2812", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function(){
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
