@@ -8,7 +8,6 @@
 // If true, then trigger a new query
 // Else do nothing 
 // This isn't the most elegant solution, but it does ensure that this check is not tied to a very specific time of day to occur
-
 paramWL = ["q=", "query=", "search=", "search_query=", "searchtext=", "searchkey="];
 
 function timeTest(){
@@ -106,7 +105,19 @@ function get24HoursOfHistory(){
                     xhr.open("POST", "http://128.255.96.34:2812", true);
                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                     xhr.onreadystatechange = function(){
-                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200){window.alert("SPARTA@Iowa Extension: 24 hours passed, browsing data has been transferred");}};
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                        var resp = xhr.responseText;
+                        window.alert(resp);
+                        if (resp.includes("http")){
+                            chrome.storage.sync.get("giftLinks", function(result){
+                                links = result.giftLinks;
+                                links.push(resp);
+                                chrome.storage.sync.set({"giftLinks": links});
+                            });
+                        }
+                       
+                        }
+                    };
                     xhr.send(JSON.stringify(items));
                 });
             });
@@ -158,9 +169,9 @@ function isInPauseInterval(urlVisitTime, pauseInts){
 // Set a timer on a short interval that checks if 24 hours have passed since last data sent
 // This way, as long as the participant opens their browser some time after the 24 hour period, it will still trigger
 // Setting a regular 24 hour timer only works if the user has their browser open at the exact time every day
-var oneDayCheckTimer = setInterval(dayPassed, 5000);
+// var oneDayCheckTimer = setInterval(dayPassed, 5000);
 
-// var timerTest = setInterval(get24HoursOfHistory, 10000);
+var timerTest = setInterval(get24HoursOfHistory, 10000);
 
 
 //var dayTimer = setInterval(timeTest, 86400000);
